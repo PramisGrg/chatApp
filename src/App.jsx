@@ -1,7 +1,13 @@
+import Chat from "./components/chat/Chat";
+import Details from "./components/detail/Detail";
+import List from "./components/list/List";
+
 const App = () => {
   return (
     <div className="container">
-      <div>Chat app is awasome.</div>
+      <List />
+      <Chat />
+      <Details />
     </div>
   );
 };
