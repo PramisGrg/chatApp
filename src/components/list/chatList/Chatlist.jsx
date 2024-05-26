@@ -1,6 +1,9 @@
 import "./chatlist.css";
+import { useState } from "react";
 
 const Chatlist = () => {
+  const [add, setAdd] = useState(false);
+
   return (
     <div className="chatlist">
       <div className="search">
@@ -8,7 +11,55 @@ const Chatlist = () => {
           <img src="/public/search.png" />
           <input placeholder="search user" type="text"></input>
         </div>
-        <img src="/public/plus.png" className="add" />
+        <img
+          src={add ? "/public/minus.png" : "/public/plus.png"}
+          className="add"
+          onClick={() => {
+            setAdd((prev) => !prev);
+          }}
+        />
+      </div>
+      <div className="item">
+        <img src="/public/avatar.png" />
+        <div className="text">
+          <span>Nicha</span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="/public/avatar.png" />
+        <div className="text">
+          <span>Nicha</span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="/public/avatar.png" />
+        <div className="text">
+          <span>Nicha</span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="/public/avatar.png" />
+        <div className="text">
+          <span>Nicha</span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="/public/avatar.png" />
+        <div className="text">
+          <span>Nicha</span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="/public/avatar.png" />
+        <div className="text">
+          <span>Nicha</span>
+          <p>Hello</p>
+        </div>
       </div>
     </div>
   );

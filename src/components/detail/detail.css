@@ -1,3 +1,97 @@
 .detail {
   flex: 1;
+
+  .user {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    border-bottom: 1px solid rgb(143, 138, 138);
+
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  .info {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .option {
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        img {
+          width: 30px;
+          height: 30px;
+          background-color: rgb(113, 110, 110);
+          padding: 10px;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+      }
+
+      .photos {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .photoItem {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .photoDetail {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 5px;
+              object-fit: cover;
+            }
+
+            span {
+              font-size: 14px;
+            }
+          }
+
+          .icons {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    button {
+      padding: 10px 20px;
+      background-color: rgb(248, 100, 100);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: red;
+      }
+
+      &.logOut {
+        background-color: rgb(110, 110, 255);
+
+        &:hover {
+          background-color: blue;
+        }
+      }
+    }
+  }
 }
