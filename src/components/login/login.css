@@ -52,8 +52,9 @@
         cursor: pointer;
         font-weight: 500;
 
-        &:hover {
-          background-color: rgb(29, 29, 227);
+        &:disabled {
+          cursor: not-allowed;
+          background-color: rgb(72, 72, 110);
         }
       }
     }

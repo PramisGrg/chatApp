@@ -22,4 +22,11 @@ body {
   background-color: rgba(57, 68, 99, 0.75);
   backdrop-filter: blur(19px) saturate(180%);
   border-radius: 3px;
+
+  .loading {
+    padding: 50px;
+    font-size: 36px;
+    border-radius: 10px;
+    background-color: rgba(32, 32, 75, 0.824);
+  }
 }
