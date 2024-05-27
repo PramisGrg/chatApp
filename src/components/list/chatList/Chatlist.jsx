@@ -1,9 +1,42 @@
 import Adduser from "./addUser/Adduser";
 import "./chatlist.css";
-import { useState } from "react";
+import { useUserStore } from "../../../lib/userStore";
+import { useEffect, useState } from "react";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { db } from "../../../lib/firebase";
 
 const Chatlist = () => {
   const [add, setAdd] = useState(false);
+  const [chats, setChats] = useState([]);
+
+  const { currentUser } = useUserStore();
+
+  useEffect(() => {
+    const unSub = onSnapshot(
+      doc(db, "userchats", currentUser.id),
+      async (res) => {
+        const items = res.data().chats;
+
+        const promises = items.map(async (item) => {
+          const userdocRef = doc(db, "users", item.receiverId);
+          const userdocSnap = await getDoc(userdocRef);
+
+          const user = userdocSnap.data();
+
+          return { ...item, user };
+        });
+        const chatData = await Promise.all(promises);
+
+        setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+      }
+    );
+
+    return () => {
+      unSub();
+    };
+  }, [currentUser.id]);
+
+  console.log(chats);
 
   return (
     <div className="chatlist">
@@ -20,48 +53,16 @@ const Chatlist = () => {
           }}
         />
       </div>
-      <div className="item">
-        <img src="/public/avatar.png" />
-        <div className="text">
-          <span>Nicha</span>
-          <p>Hello</p>
+      {chats.map((chat) => (
+        <div className="item" key={chat.chatId}>
+          <img src={chat.user.avatar || "./avatar.png"} />
+          <div className="text">
+            <span>{chat.user.username}</span>
+            <p>{chat.lastmessage}</p>
+          </div>
         </div>
-      </div>
-      <div className="item">
-        <img src="/public/avatar.png" />
-        <div className="text">
-          <span>Nicha</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      <div className="item">
-        <img src="/public/avatar.png" />
-        <div className="text">
-          <span>Nicha</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      <div className="item">
-        <img src="/public/avatar.png" />
-        <div className="text">
-          <span>Nicha</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      <div className="item">
-        <img src="/public/avatar.png" />
-        <div className="text">
-          <span>Nicha</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      <div className="item">
-        <img src="/public/avatar.png" />
-        <div className="text">
-          <span>Nicha</span>
-          <p>Hello</p>
-        </div>
-      </div>
+      ))}
+
       {add && <Adduser />}
     </div>
   );
